@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.36422.26
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Spirit_Energy_Py", "Spirit_Energy_Py\Spirit_Energy_Py.pyproj", "{E6FDA3F7-31CD-428D-B896-295A669D5549}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6FDA3F7-31CD-428D-B896-295A669D5549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6FDA3F7-31CD-428D-B896-295A669D5549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B081E56-F23B-4F2F-BE91-4FCE08C01740}
+	EndGlobalSection
+EndGlobal
