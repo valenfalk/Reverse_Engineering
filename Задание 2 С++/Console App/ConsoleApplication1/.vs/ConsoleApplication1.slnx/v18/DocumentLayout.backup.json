@@ -1,0 +1,97 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\ConsoleApplication1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ConsoleApplication1\\ConsoleApplication1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\toolchain.cmake||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ConsoleApplication1\\toolchain.cmake||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\FindPkgConfig.cmake||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ConsoleApplication1\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043E\u0431\u0437\u043E\u0440\u0430 CMake||{B1CAA5B0-FEB1-4350-8AB9-F895876842F2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "toolchain.cmake",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\toolchain.cmake",
+              "RelativeDocumentMoniker": "ConsoleApplication1\\toolchain.cmake",
+              "ToolTip": "C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\toolchain.cmake",
+              "RelativeToolTip": "ConsoleApplication1\\toolchain.cmake",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-08T12:33:37.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FindPkgConfig.cmake",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\FindPkgConfig.cmake",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\FindPkgConfig.cmake",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\FindPkgConfig.cmake",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\FindPkgConfig.cmake",
+              "ViewState": "AgIAADkEAAAAAAAAAADgv0YEAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-08T12:29:50.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043E\u0431\u0437\u043E\u0440\u0430 CMake",
+              "DocumentMoniker": "\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043E\u0431\u0437\u043E\u0440\u0430 CMake",
+              "ToolTip": "\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043E\u0431\u0437\u043E\u0440\u0430 CMake",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-08T12:29:29.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CMakeLists.txt",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\CMakeLists.txt",
+              "RelativeDocumentMoniker": "ConsoleApplication1\\CMakeLists.txt",
+              "ToolTip": "C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\CMakeLists.txt",
+              "RelativeToolTip": "ConsoleApplication1\\CMakeLists.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-05-08T12:27:46.451Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConsoleApplication1.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\ConsoleApplication1.cpp",
+              "RelativeDocumentMoniker": "ConsoleApplication1\\ConsoleApplication1.cpp",
+              "ToolTip": "C:\\Users\\User\\Documents\\\u041C\u0418\u0418\u0422\\\u0420\u0435\u0432\u0435\u0440\u0441 \u0418\u043D\u0436\u0435\u043D\u0438\u0440\u0438\u043D\u0433\\Reverse_Engineering\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 2 \u0421\u002B\u002B\\Console App\\ConsoleApplication1\\ConsoleApplication1\\ConsoleApplication1.cpp",
+              "RelativeToolTip": "ConsoleApplication1\\ConsoleApplication1.cpp",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwBoAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-08T11:10:26.731Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

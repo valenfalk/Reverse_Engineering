@@ -1,0 +1,355 @@
+ILSpy:
+.class private auto ansi beforefieldinit Program
+	extends [System.Runtime]System.Object
+{
+	// Methods
+	.method private hidebysig static 
+		void Main () cil managed 
+	{
+		// Method begins at RVA 0x2050
+		// Header size: 12
+		// Code size: 349 (0x15d)
+		.maxstack 3
+		.entrypoint
+		.locals init (
+			[0] float64 a,
+			[1] float64 b,
+			[2] float64 result,
+			[3] char op,
+			[4] bool,
+			[5] valuetype [System.Console]System.ConsoleKeyInfo,
+			[6] bool,
+			[7] char,
+			[8] char,
+			[9] bool,
+			[10] valuetype [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler
+		)
+
+		// {
+		IL_0000: nop
+		// double result = 0.0;
+		IL_0001: ldc.r8 0.0
+		IL_000a: stloc.0
+		// double result2 = 0.0;
+		IL_000b: ldc.r8 0.0
+		IL_0014: stloc.1
+		// double num = 0.0;
+		IL_0015: ldc.r8 0.0
+		IL_001e: stloc.2
+		// char c = '0';
+		IL_001f: ldc.i4.s 48
+		IL_0021: stloc.3
+		// Console.WriteLine("=== CMD Calculator ===");
+		IL_0022: ldstr "=== CMD Calculator ==="
+		IL_0027: call void [System.Console]System.Console::WriteLine(string)
+		// Console.Write("Enter first number: ");
+		IL_002c: nop
+		IL_002d: ldstr "Enter first number: "
+		IL_0032: call void [System.Console]System.Console::Write(string)
+		// if (!double.TryParse(Console.ReadLine(), out result))
+		IL_0037: nop
+		IL_0038: call string [System.Console]System.Console::ReadLine()
+		IL_003d: ldloca.s 0
+		IL_003f: call bool [System.Runtime]System.Double::TryParse(string, float64&)
+		IL_0044: ldc.i4.0
+		IL_0045: ceq
+		IL_0047: stloc.s 4
+		// (no C# code)
+		IL_0049: ldloc.s 4
+		IL_004b: brfalse.s IL_005e
+
+		// Console.WriteLine("Invalid first number!");
+		IL_004d: nop
+		IL_004e: ldstr "Invalid first number!"
+		IL_0053: call void [System.Console]System.Console::WriteLine(string)
+		// }
+		IL_0058: nop
+		IL_0059: br IL_015c
+
+		// Console.Write("Enter operator (+ - * /): ");
+		IL_005e: ldstr "Enter operator (+ - * /): "
+		IL_0063: call void [System.Console]System.Console::Write(string)
+		// c = Console.ReadKey().KeyChar;
+		IL_0068: nop
+		IL_0069: call valuetype [System.Console]System.ConsoleKeyInfo [System.Console]System.Console::ReadKey()
+		IL_006e: stloc.s 5
+		// Console.WriteLine();
+		IL_0070: ldloca.s 5
+		IL_0072: call instance char [System.Console]System.ConsoleKeyInfo::get_KeyChar()
+		IL_0077: stloc.3
+		IL_0078: call void [System.Console]System.Console::WriteLine()
+		// Console.Write("Enter second number: ");
+		IL_007d: nop
+		IL_007e: ldstr "Enter second number: "
+		IL_0083: call void [System.Console]System.Console::Write(string)
+		// if (!double.TryParse(Console.ReadLine(), out result2))
+		IL_0088: nop
+		IL_0089: call string [System.Console]System.Console::ReadLine()
+		IL_008e: ldloca.s 1
+		IL_0090: call bool [System.Runtime]System.Double::TryParse(string, float64&)
+		IL_0095: ldc.i4.0
+		IL_0096: ceq
+		IL_0098: stloc.s 6
+		// (no C# code)
+		IL_009a: ldloc.s 6
+		IL_009c: brfalse.s IL_00af
+
+		// Console.WriteLine("Invalid second number!");
+		IL_009e: nop
+		IL_009f: ldstr "Invalid second number!"
+		IL_00a4: call void [System.Console]System.Console::WriteLine(string)
+		// (no C# code)
+		IL_00a9: nop
+		// switch (c)
+		IL_00aa: br IL_015c
+
+		IL_00af: ldloc.3
+		IL_00b0: stloc.s 8
+		// (no C# code)
+		IL_00b2: ldloc.s 8
+		IL_00b4: stloc.s 7
+		IL_00b6: ldloc.s 7
+		IL_00b8: ldc.i4.s 42
+		IL_00ba: sub
+		IL_00bb: switch (IL_00e6, IL_00da, IL_0112, IL_00e0, IL_0112, IL_00ec)
+
+		// num = result + result2;
+		IL_00d8: br.s IL_0112
+
+		IL_00da: ldloc.0
+		IL_00db: ldloc.1
+		IL_00dc: add
+		IL_00dd: stloc.2
+		// break;
+		IL_00de: br.s IL_011f
+
+		// num = result - result2;
+		IL_00e0: ldloc.0
+		IL_00e1: ldloc.1
+		IL_00e2: sub
+		IL_00e3: stloc.2
+		// break;
+		IL_00e4: br.s IL_011f
+
+		// num = result * result2;
+		IL_00e6: ldloc.0
+		IL_00e7: ldloc.1
+		IL_00e8: mul
+		IL_00e9: stloc.2
+		// break;
+		IL_00ea: br.s IL_011f
+
+		// if (result2 == 0.0)
+		IL_00ec: ldloc.1
+		IL_00ed: ldc.r8 0.0
+		IL_00f6: ceq
+		IL_00f8: stloc.s 9
+		// (no C# code)
+		IL_00fa: ldloc.s 9
+		IL_00fc: brfalse.s IL_010c
+
+		// Console.WriteLine("Division by zero!");
+		IL_00fe: nop
+		IL_00ff: ldstr "Division by zero!"
+		IL_0104: call void [System.Console]System.Console::WriteLine(string)
+		// return;
+		IL_0109: nop
+		IL_010a: br.s IL_015c
+
+		// num = result / result2;
+		IL_010c: ldloc.0
+		IL_010d: ldloc.1
+		IL_010e: div
+		IL_010f: stloc.2
+		// break;
+		IL_0110: br.s IL_011f
+
+		// Console.WriteLine("Unknown operator!");
+		IL_0112: ldstr "Unknown operator!"
+		IL_0117: call void [System.Console]System.Console::WriteLine(string)
+		// return;
+		IL_011c: nop
+		IL_011d: br.s IL_015c
+
+		// Console.WriteLine($"Result: {num}");
+		IL_011f: ldloca.s 10
+		IL_0121: ldc.i4.8
+		IL_0122: ldc.i4.1
+		IL_0123: call instance void [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::.ctor(int32, int32)
+		IL_0128: ldloca.s 10
+		IL_012a: ldstr "Result: "
+		IL_012f: call instance void [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendLiteral(string)
+		// (no C# code)
+		IL_0134: nop
+		IL_0135: ldloca.s 10
+		IL_0137: ldloc.2
+		IL_0138: call instance void [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<float64>(!!0)
+		IL_013d: nop
+		IL_013e: ldloca.s 10
+		IL_0140: call instance string [System.Runtime]System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::ToStringAndClear()
+		IL_0145: call void [System.Console]System.Console::WriteLine(string)
+		// Console.WriteLine("Press any key to exit...");
+		IL_014a: nop
+		IL_014b: ldstr "Press any key to exit..."
+		IL_0150: call void [System.Console]System.Console::WriteLine(string)
+		// Console.ReadKey();
+		IL_0155: nop
+		IL_0156: call valuetype [System.Console]System.ConsoleKeyInfo [System.Console]System.Console::ReadKey()
+		IL_015b: pop
+
+		// (no C# code)
+		IL_015c: ret
+	} // end of method Program::Main
+
+	.method public hidebysig specialname rtspecialname 
+		instance void .ctor () cil managed 
+	{
+		// Method begins at RVA 0x21b9
+		// Header size: 1
+		// Code size: 8 (0x8)
+		.maxstack 8
+
+		// {
+		IL_0000: ldarg.0
+		// (no C# code)
+		IL_0001: call instance void [System.Runtime]System.Object::.ctor()
+		// }
+		IL_0006: nop
+		IL_0007: ret
+	} // end of method Program::.ctor
+
+} // end of class Program
+
+.NET Reflector:
+private static void Main()
+{
+    double result = 0.0;
+    double num2 = 0.0;
+    double num3 = 0.0;
+    char keyChar = '0';
+    Console.WriteLine("=== CMD Calculator ===");
+    Console.Write("Enter first number: ");
+    if (double.TryParse(Console.ReadLine(), out result))
+    {
+        Console.Write("Enter operator (+ - * /): ");
+        keyChar = Console.ReadKey().KeyChar;
+        Console.WriteLine();
+        Console.Write("Enter second number: ");
+        if (double.TryParse(Console.ReadLine(), out num2))
+        {
+            switch (keyChar)
+            {
+                case '*':
+                    num3 = result * num2;
+                    break;
+
+                case '+':
+                    num3 = result + num2;
+                    break;
+
+                case '-':
+                    num3 = result - num2;
+                    break;
+
+                case '/':
+                    if (num2 != 0.0)
+                    {
+                        num3 = result / num2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Division by zero!");
+                        return;
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Unknown operator!");
+                    return;
+            }
+            DefaultInterpolatedStringHandler handler = new DefaultInterpolatedStringHandler(8, 1);
+            handler.AppendLiteral("Result: ");
+            handler.AppendFormatted<double>(num3);
+            Console.WriteLine(handler.ToStringAndClear());
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+        }
+        else
+        {
+            Console.WriteLine("Invalid second number!");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Invalid first number!");
+    }
+}
+
+ 
+
+ 
+private static void Main()
+{
+    double result = 0.0;
+    double num2 = 0.0;
+    double num3 = 0.0;
+    char keyChar = '0';
+    Console.WriteLine("=== CMD Calculator ===");
+    Console.Write("Enter first number: ");
+    if (double.TryParse(Console.ReadLine(), out result))
+    {
+        Console.Write("Enter operator (+ - * /): ");
+        keyChar = Console.ReadKey().KeyChar;
+        Console.WriteLine();
+        Console.Write("Enter second number: ");
+        if (double.TryParse(Console.ReadLine(), out num2))
+        {
+            switch (keyChar)
+            {
+                case '*':
+                    num3 = result * num2;
+                    break;
+
+                case '+':
+                    num3 = result + num2;
+                    break;
+
+                case '-':
+                    num3 = result - num2;
+                    break;
+
+                case '/':
+                    if (num2 != 0.0)
+                    {
+                        num3 = result / num2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Division by zero!");
+                        return;
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Unknown operator!");
+                    return;
+            }
+            DefaultInterpolatedStringHandler handler = new DefaultInterpolatedStringHandler(8, 1);
+            handler.AppendLiteral("Result: ");
+            handler.AppendFormatted<double>(num3);
+            Console.WriteLine(handler.ToStringAndClear());
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+        }
+        else
+        {
+            Console.WriteLine("Invalid second number!");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Invalid first number!");
+    }
+}
+
+ 

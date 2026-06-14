@@ -1,0 +1,40 @@
+{
+  "payload": {
+    "name": "petr.mavzovin@gmail.com",
+    "email": "petr.mavzovin@gmail.com",
+    "licenses": [
+      {
+        "id": "96-280B-ED93-11",
+        "owner": "petr.mavzovin@gmail.com",
+        "product_id": "IDAFREE",
+        "edition_id": "ida-free",
+        "description": "IDA Free PC",
+        "start_date": "2026-05-28",
+        "end_date": "2027-05-28",
+        "issued_on": "2026-05-28 11:04:20",
+        "license_type": "named",
+        "seats": 1,
+        "add_ons": [
+          {
+            "id": "97-E910-E44E-31",
+            "code": "HEXCX64",
+            "owner": "96-280B-ED93-11",
+            "start_date": "2026-05-28",
+            "end_date": "2027-05-28"
+          },
+          {
+            "id": "97-9045-63EA-89",
+            "code": "HEXCX86",
+            "owner": "96-280B-ED93-11",
+            "start_date": "2026-05-28",
+            "end_date": "2027-05-28"
+          }
+        ]
+      }
+    ]
+  },
+  "header": {
+    "version": 1
+  },
+  "signature": "40CAE6A475B721B1BE9201BEC0A0655ECD522DC1084CA45D8B3763009B3012F0B68C404405CB7928AA2E068A7041AFDB0386020F7ABB1CFC1BA9E63EF59511A9528798BA22C3FCC0AE09767E44015856424D9A694D3D1EF4AC43284E1B61C003FCA5E0BD72E4E174F96524E97D4584586EFC0A7D7859823AE2780EA091CE2E8A"
+}

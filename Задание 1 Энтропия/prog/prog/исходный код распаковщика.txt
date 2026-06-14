@@ -1,0 +1,324 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <iomanip>
+#include <string>
+#include <windows.h>
+#include "aes.hpp"
+#include "..\\zlib\zlib.h"
+#pragma comment(lib, "C:\\Users\\user\\source\\repos\\ntru\\zlib\\zlib.lib")// Для распаковки
+
+#include <iostream>
+#include <string>
+#define CURL_STATICLIB
+#include "..\\curl\\curl.h"
+
+#pragma comment(lib, "C:\\Users\\user\\source\\repos\\client\\client\\lib\\libcurl_a.lib")
+
+/* Windows Specific Additional Dependencies */
+#pragma comment (lib,"Normaliz.lib")
+#pragma comment (lib,"Ws2_32.lib")
+#pragma comment (lib,"Wldap32.lib")
+#pragma comment (lib,"Crypt32.lib")
+
+// Функция для записи данных в строку
+static int writer(char* data, size_t size, size_t nmemb, std::string* writerData)
+{
+    if (writerData == NULL)
+        return 0;
+
+    writerData->append(data, size * nmemb);
+
+    return size * nmemb;
+}
+
+bool RunAndDeleteExtractedFile(const std::string& outputPath) {
+    // Структуры для запуска процесса
+    STARTUPINFO si = { sizeof(si) };
+    PROCESS_INFORMATION pi;
+
+    // Запускаем файл output.exe
+    if (!CreateProcess(outputPath.c_str(), NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+        std::cerr << "Error: Could not execute output file.\n";
+        return false;
+    }
+
+    // Ожидаем завершения процесса
+    WaitForSingleObject(pi.hProcess, INFINITE);
+
+    // Закрываем дескрипторы процесса и потока
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
+
+    // Удаляем файл после завершения процесса
+    if (!DeleteFile(outputPath.c_str())) {
+        std::cerr << "Error: Could not delete output file.\n";
+        return false;
+    }
+
+    std::cout << "Output file deleted successfully after execution.\n";
+    return true;
+}
+
+// Функция для преобразования строки в массив байтов (для ключа и IV)
+void stringToBytes(const std::string& str, unsigned char* bytes) {
+    for (size_t i = 0; i < str.length() && i < 16; ++i) {
+        bytes[i] = static_cast<unsigned char>(str[i]);
+    }
+}
+
+// Функция для получения пути текущего исполняемого файла
+std::string getExecutablePath() {
+    char path[MAX_PATH];
+    if (GetModuleFileNameA(NULL, path, MAX_PATH) == 0) {
+        std::cerr << "Не удалось получить путь к текущему исполняемому файлу." << std::endl;
+        return "";
+    }
+    return std::string(path);
+}
+
+// Функция для получения серийного номера диска
+std::string getDiskSerialNumber(const std::string& driveLetter) {
+    DWORD serialNumber = 0;
+    BOOL result = GetVolumeInformationA(
+        (driveLetter + ":\\").c_str(), // Путь к диску
+        NULL,                          // Имя тома
+        0,                             // Размер имени тома
+        &serialNumber,                 // Серийный номер
+        NULL,                          // Максимальная длина имени файла
+        NULL,                          // Флаги файловой системы
+        NULL,                          // Имя файловой системы
+        0                              // Размер имени файловой системы
+    );
+
+    if (result) {
+        char buffer[9];
+        snprintf(buffer, sizeof(buffer), "%08X", serialNumber);
+        return std::string(buffer);
+    }
+    else {
+        return "ERROR";
+    }
+}
+
+// Функция для чтения последней секции EXE файла с учетом длины данных
+std::vector<unsigned char> readLastSection(const std::string& exeFilePath) {
+    // Открываем файл для чтения
+    std::ifstream file(exeFilePath, std::ios::binary);
+    if (!file.is_open()) {
+        std::cerr << "Не удалось открыть файл: " << exeFilePath << std::endl;
+        return {};
+    }
+
+    // Читаем весь файл в память
+    file.seekg(0, std::ios::end);
+    size_t fileSize = file.tellg();
+    file.seekg(0, std::ios::beg);
+    std::vector<unsigned char> fileData(fileSize);
+    file.read(reinterpret_cast<char*>(fileData.data()), fileSize);
+    file.close();
+
+    // Загружаем заголовок PE файла
+    PIMAGE_DOS_HEADER dosHeader = reinterpret_cast<PIMAGE_DOS_HEADER>(fileData.data());
+    PIMAGE_NT_HEADERS ntHeaders = reinterpret_cast<PIMAGE_NT_HEADERS>(&fileData[dosHeader->e_lfanew]);
+
+    // Ищем последнюю секцию
+    PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(ntHeaders);
+    size_t lastSectionIndex = ntHeaders->FileHeader.NumberOfSections - 1;
+    section += lastSectionIndex;
+
+    // Извлекаем данные последней секции
+    size_t sectionSize = section->SizeOfRawData;
+    size_t sectionOffset = section->PointerToRawData;
+
+    std::vector<unsigned char> sectionData(fileData.begin() + sectionOffset, fileData.begin() + sectionOffset + sectionSize);
+
+    // Проверяем, что в секции достаточно байтов
+    if (sectionData.size() < 4) {
+        std::cerr << "Ошибка: недостаточно данных для получения длины." << std::endl;
+        return {};
+    }
+
+    // Первые 4 байта секции - это длина данных
+    size_t dataLength = *reinterpret_cast<uint32_t*>(&sectionData[0]);
+
+    // Проверяем, что в секции есть достаточно данных для извлечения
+    if (sectionData.size() < 4 + dataLength) {
+        std::cerr << "Ошибка: недостаточно данных для извлечения." << std::endl;
+        return {};
+    }
+
+    // Извлекаем данные, начиная с 5-го байта (индекс 4)
+    std::vector<unsigned char> extractedData(sectionData.begin() + 4, sectionData.begin() + 4 + dataLength);
+
+    return extractedData;
+}
+
+// Функция для распаковки данных zlib
+std::vector<unsigned char> decompressData(const std::vector<unsigned char>& compressed_data) {
+    // Предполагаем, что распакованные данные могут быть значительно больше, поэтому умножим размер на 4
+    uLongf decompressedSize = compressed_data.size() * 100;
+    std::vector<unsigned char> decompressed_data(decompressedSize);
+
+    // Выполняем распаковку данных
+    int result = uncompress(decompressed_data.data(), &decompressedSize, compressed_data.data(), compressed_data.size());
+
+    // Проверка на успешность распаковки
+    if (result != Z_OK) {
+        std::cerr << "Ошибка при распаковке данных zlib. Код ошибки: " << result << std::endl;
+        return {};
+    }
+
+    // Обрезаем вектор до фактического размера распакованных данных
+    decompressed_data.resize(decompressedSize);
+
+    return decompressed_data;
+}
+
+// Функция для вывода данных в hex формате
+void printHex(const std::vector<unsigned char>& data) {
+    for (size_t i = 0; i < data.size(); ++i) {
+        std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data[i] << " ";
+        if ((i + 1) % 16 == 0) {
+            std::cout << std::endl;
+        }
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    setlocale(LC_ALL, "rus");
+    // Запрашиваем у пользователя пароль
+    std::string password;
+    std::cout << "Введите ключ доступа: ";
+    std::cin >> password;
+
+    // Получаем серийный номер диска C
+    std::string serialNumber = getDiskSerialNumber("C");
+    if (serialNumber == "ERROR") {
+        std::cerr << "Ошибка: не удалось получить серийный номер диска." << std::endl;
+        return -1;
+    }
+
+    // Формируем JSON данные
+    std::string jsonData = "{\"login\": \"" + serialNumber + "\", \"password\": \"" + password + "\"}";
+
+    // Инициализируем libcurl
+    curl_global_init(CURL_GLOBAL_ALL);
+    CURL* curl = curl_easy_init();
+    std::string content;
+    if (curl) {
+
+        // Устанавливаем URL для запроса через HTTPS
+        curl_easy_setopt(curl, CURLOPT_URL, "https://localhost:8443/");
+
+        // Устанавливаем данные для POST-запроса
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonData.c_str());
+
+        // Устанавливаем заголовок для указания типа контента
+        struct curl_slist* headers = NULL;
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+        // Отключаем проверку сертификата для самоподписанных сертификатов
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L); // Отключаем проверку сертификата
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L); // Отключаем проверку хоста
+
+        // Устанавливаем функцию для записи ответа
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &content);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writer);
+
+        // Выполняем запрос
+        CURLcode code = curl_easy_perform(curl);
+        if (content == "Invalid login or password") return 0;
+
+        // Освобождаем ресурсы
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
+    }
+    else {
+        std::cerr << "Ошибка: не удалось инициализировать curl." << std::endl;
+    }
+
+    curl_global_cleanup();
+
+
+    // Ключ и IV в виде строк
+   // std::string key_str = "0123456789abcdef";  // 16 байт (128 бит)
+    std::string key_str = content;
+    std::string iv_str = "abcdef9876543210";  // 16 байт (128 бит)
+
+    // Преобразуем строки в массивы байтов
+    unsigned char key[16];
+    unsigned char iv[16];
+    stringToBytes(key_str, key);
+    stringToBytes(iv_str, iv);
+
+    // Получаем путь к текущему исполняемому файлу
+    std::string exeFilePath = getExecutablePath();
+    if (exeFilePath.empty()) {
+        return 1;
+    }
+
+    // Чтение последней секции текущего EXE файла
+    std::vector<unsigned char> encrypted_data = readLastSection(exeFilePath);
+    if (encrypted_data.empty()) {
+        std::cerr << "Не удалось прочитать последнюю секцию файла." << std::endl;
+        return 1;
+    }
+
+    // Выводим считанные данные в шестнадцатеричном формате
+    //std::cout << "Считанные данные (в hex):\n";
+    //printHex(encrypted_data);
+
+    // Создаем объект контекста для AES (используем Tiny AES)
+    AES_ctx ctx;
+    AES_init_ctx_iv(&ctx, key, iv);
+
+    // Расшифровка данных с использованием Tiny AES в режиме CBC
+    AES_CBC_decrypt_buffer(&ctx, encrypted_data.data(), encrypted_data.size());
+
+    // Выводим расшифрованные данные в шестнадцатеричном формате
+    //std::cout << "\nРасшифрованные данные (в hex):\n";
+    //printHex(encrypted_data);
+
+    // Распаковываем данные
+    std::vector<unsigned char> decompressed_data = decompressData(encrypted_data);
+
+    if (!decompressed_data.empty()) {
+       // std::cout << "Распакованные данные (в hex):\n";
+        for (size_t i = 0; i < decompressed_data.size(); ++i) {
+     //       std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)decompressed_data[i] << " ";
+            if ((i + 1) % 16 == 0) {
+      //          std::cout << std::endl;
+            }
+        }
+    }
+    else {
+        std::cerr << "Распаковка данных не удалась." << std::endl;
+    }
+
+
+    // Сохраняем расшифрованные данные в файл
+    std::ofstream decrypted_file("decrypted_output.exe", std::ios::binary);
+    if (!decrypted_file.is_open()) {
+        std::cerr << "Не удалось создать файл для записи расшифрованных данных." << std::endl;
+        return 1;
+    }
+
+    decrypted_file.write(reinterpret_cast<const char*>(decompressed_data.data()), decompressed_data.size());
+    decrypted_file.close();
+
+    //std::cout << "Расшифрованный файл успешно сохранен как 'decrypted_output.exe'" << std::endl;
+
+    // Запуск и удаление созданного файла
+    if (!RunAndDeleteExtractedFile("decrypted_output.exe")) {
+        std::cerr << "Execution or deletion of extracted file failed.\n";
+        return 1;
+    }
+
+    std::cout << "Execution and deletion of extracted file completed.\n";
+
+    return 0;
+}

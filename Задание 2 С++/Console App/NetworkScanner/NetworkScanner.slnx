@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="NetworkScanner.vcxproj" Id="75c052dd-3a94-4b0b-b66b-3ed12e8718c9" />
+</Solution>
