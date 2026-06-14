@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="DuplicateFinder.vcxproj" Id="245da842-15b4-47af-bc04-ab6993dd6f99" />
+</Solution>

@@ -1,0 +1,1 @@
+clang calculator_gui.c -o calc.exe `pkg-config --cflags --libs gtk+-3.0`

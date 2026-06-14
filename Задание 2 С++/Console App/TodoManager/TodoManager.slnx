@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="TodoManager.vcxproj" Id="6cd678d6-3dcc-4f18-9173-67ba33c6ad80" />
+</Solution>
